@@ -1,0 +1,404 @@
+[
+    {
+        "produkt_navn": "Øland Flammet",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/Flammet-Slebet.jpg",
+        "anvendelse": "Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Antik",
+            "Børstet",
+            "Høvlet",
+            "Slebet"
+        ],
+        "farver": [
+            "Brun",
+            "Gråbrun",
+            "Rød"
+        ]
+    },
+    {
+        "produkt_navn": "Øland Grå",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/Graa-Oeland-Slebet.jpg",
+        "anvendelse": "Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Antik",
+            "Børstet",
+            "Høvlet",
+            "Slebet"
+        ],
+        "farver": [
+            "Grå"
+        ]
+    },
+    {
+        "produkt_navn": "Øland Gråbrun",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/Graabrun-Slebet.jpg",
+        "anvendelse": "Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Antik",
+            "Høvlet",
+            "Slebet"
+        ],
+        "farver": [
+            "Gråbrun"
+        ]
+    },
+    {
+        "produkt_navn": "Øland Rød",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/Oeland-Roed-Slebet.jpg",
+        "anvendelse": "Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Antik",
+            "Børstet",
+            "Høvlet",
+            "Slebet"
+        ],
+        "farver": [
+            "Rød"
+        ]
+    },
+    {
+        "produkt_navn": "Bardiglio",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/20160615-bardiglio-di-carrara-slebet.jpg",
+        "anvendelse": "Indendørs",
+        "pris": "$$$",
+        "oprindelse": "Italien",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Børstet",
+            "Poleret",
+            "Sandblæst",
+            "Slebet",
+            "Stokhugget",
+            "Stokhugget/Børstet"
+        ],
+        "farver": [
+            "Grå"
+        ]
+    },
+    {
+        "produkt_navn": "Bianco Carrara",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/20160615-Bianco-Carrara-Sandblaest.webp",
+        "anvendelse": "Indendørs",
+        "pris": "$$$",
+        "oprindelse": "Italien",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Poleret",
+            "Sandblæst",
+            "Sandblæst/Børstet",
+            "Slebet"
+        ],
+        "farver": [
+            "Hvid"
+        ]
+    },
+    {
+        "produkt_navn": "Black Galaxy",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/Black-Galaxy-Poleret.jpg",
+        "anvendelse": "Belægning / Udendørs",
+        "pris": "$",
+        "oprindelse": "Italien",
+        "stentyper": [
+            "Granit"
+        ],
+        "overflader": [
+            "Andet",
+            "Poleret",
+            "Slebet"
+        ],
+        "farver": [
+            "Sort"
+        ]
+    },
+    {
+        "produkt_navn": "Borghamn Lysgrå",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/kalksten-ljusgra-0.png",
+        "anvendelse": "Belægning / Udendørs, Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Fliser",
+            "Andet",
+            "Antik",
+            "Høvlet",
+            "Kløvet",
+            "Poleret",
+            "Slebet"
+
+        ],
+        "farver": [
+
+        ]
+    },
+    {
+        "produkt_navn": "Borghamn Rød",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/kalksten-rod-0.png",
+        "anvendelse": "Belægning / Udendørs, Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Andet",
+            "Antik",
+            "Høvlet",
+            "Kløvet",
+            "Poleret",
+            "Slebet"
+        ],
+        "farver": [
+            "Rød"
+        ]
+    },
+    {
+        "produkt_navn": "Brännlyckan",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/brannlyckan-0.png",
+        "anvendelse": "Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Poleret",
+            "Slebet"
+        ],
+        "farver": [
+
+        ]
+    },
+    {
+        "produkt_navn": "Brännlyckan Mørk",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/bra¦ennlyckan-mork-0.png",
+        "anvendelse": "Indendørs",
+        "pris": "$$",
+        "oprindelse": "Sverige",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Poleret",
+            "Slebet"
+        ],
+        "farver": [
+            "Blå"
+        ]
+    },
+    {
+        "produkt_navn": "Burlington Baycliff Caulfeild",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/BayC-Sanded.webp",
+        "anvendelse": "Indendørs",
+        "pris": "$$",
+        "oprindelse": "England",
+        "stentyper": [
+            "Marmor",
+            "Kalksten"
+        ],
+        "overflader": [
+            "Børstet",
+            "Brændt",
+            "Kløvet",
+            "Poleret",
+            "Slebet"
+        ],
+        "farver": [
+            "Brun",
+            "Mørkebrun"
+        ]
+    },
+    {
+        "produkt_navn": "Burlington Brandy Crag",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/BC-Sanded.jpg",
+        "anvendelse": "Belægning / Udendørs, Facade, Indendørs",
+        "pris": "$$",
+        "oprindelse": "England",
+        "stentyper": [
+            "Skifer"
+        ],
+        "overflader": [
+            "Andet",
+            "Brændt",
+            "Kløvet",
+            "Poleret",
+            "Sandblæst",
+            "Savet",
+            "Slebet",
+            "Stokhugget"
+        ],
+        "farver": [
+            "Grå",
+            "Mørkegrå"
+        ]
+    },
+    {
+        "produkt_navn": "Brandy Crag Silver",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/20160615-Brandy-Crag-Silver-OCo-slebet.jpg",
+        "anvendelse": "Belægning / Udendørs, Facade, Indendørs",
+        "pris": "$$$",
+        "oprindelse": "England",
+        "stentyper": [
+            "Granit"
+        ],
+        "overflader": [
+            "Andet",
+            "Antik",
+            "Børstet",
+            "Brændt",
+            "Brændt/Børstet",
+            "Høvlet",
+            "Kløvet",
+            "Poleret",
+            "Sandblæst",
+            "Sandblæst/Børstet",
+            "Savet",
+            "Slebet",
+            "Spartlet/Sandblæst",
+            "Spartlet/Slebet",
+            "Stokhugget",
+            "Stokhugget/Børstet",
+            "Sviluppi",
+            "Uspartlet/Sandblæst",
+            "Uspartlet/Slebet"
+        ],
+        "farver": [
+            "Grå",
+            "Mørkegrå"
+        ]
+    },
+    {
+        "produkt_navn": "Burlington Broughton Moor",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/BM-Honed.jpg",
+        "anvendelse": "Belægning / Udendørs, Facade, Indendørs",
+        "pris": "$$",
+        "oprindelse": "England",
+        "stentyper": [
+            "Skifer"
+        ],
+        "overflader": [
+            "Andet",
+            "Børstet",
+            "Brændt",
+            "Brændt/Børstet",
+            "Kløvet",
+            "Poleret",
+            "Sandblæst",
+            "Savet",
+            "Slebet",
+            "Stokhugget",
+            "Sviluppi"
+        ],
+        "farver": [
+            "Grøn"
+        ]
+    },
+    {
+        "produkt_navn": "Burlington Bursting Stone",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/BS-Honed.jpg",
+        "anvendelse": "Belægning / Udendørs, Facade, Indendørs",
+        "pris": "$$",
+        "oprindelse": "England",
+        "stentyper": [
+            "Skifer"
+        ],
+        "overflader": [
+            "Andet",
+            "Brændt",
+            "Kløvet",
+            "Poleret",
+            "Sandblæst",
+            "Savet",
+            "Slebet",
+            "Stokhugget"
+        ],
+        "farver": [
+            "Grågrøn"
+        ]
+    },
+    {
+        "produkt_navn": "Burlington Elterwater",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/ELT-Spot-Textured.webp",
+        "anvendelse": "Belægning / Udendørs, Facade, Indendørs",
+        "pris": "$$",
+        "oprindelse": "England",
+        "stentyper": [
+            "Skifer"
+        ],
+        "overflader": [
+            "Andet",
+            "Børstet",
+            "Brændt",
+            "Brændt/Børstet",
+            "Kløvet",
+            "Poleret",
+            "Sandblæst",
+            "Savet",
+            "Slebet",
+            "Stokhugget"
+        ],
+        "farver": [
+            "Grøn"
+        ]
+    },
+    {
+        "produkt_navn": "Burlington Kirkby Stone",
+        "billede_url": "https://zurface.dk/wp-content/uploads/2023/10/KS-Honed.jpg",
+        "anvendelse": "Belægning / Udendørs, Facade, Indendørs",
+        "pris": "$$",
+        "oprindelse": "England",
+        "stentyper": [
+            "Skifer"
+        ],
+        "overflader": [
+            "Andet",
+            "Børstet",
+            "Brændt",
+            "Kløvet",
+            "Poleret",
+            "Sandblæst",
+            "Savet",
+            "Slebet",
+            "Stokhugget"
+        ],
+        "farver": [
+            "Gråblå"
+        ]
+    }
+]

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsiv Sidebar med Produkter og Grid</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        #board-wrapper {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 70%;
+        }
+
+        .sidebar {
+            width: 350px;
+            background-color: #fff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            z-index: 100;
+        }
+
+        .sidebar.minimized {
+            width: 60px;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            transition: opacity 0.3s;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .filter-section {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: opacity 0.3s;
+        }
+
+        .filter-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-options select,
+        .filter-options input {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .filter-options button {
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .filter-options button:hover {
+            background-color: #e0e0e0;
+        }
+
+        #sidebar {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            transition: opacity 0.3s;
+        }
+
+        .produkt-item {
+            cursor: pointer;
+            transition: transform 0.2s;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            padding: 10px;
+        }
+
+        .produkt-item:hover {
+            transform: scale(1.12);
+        }
+
+        .produkt-item.selected {
+            border: 2px solid #4a90e2;
+            box-shadow: 0 3px 10px rgba(74, 144, 226, 0.2);
+            transform: scale(1.12);
+        }
+
+        .produkt-item img {
+            width: 100%;
+            /*aspect-ratio: 1/1;*/
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .produkt-item p {
+            font-size: 14px;
+            color: #333;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+            flex: 1;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 60px;
+        }
+
+        /* Board og grid styles */
+        #controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        #controls select,
+        #controls button {
+            margin-right: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        #controls button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #controls button:hover {
+            background-color: #3a7bc8;
+        }
+
+        #puzzle_container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1px;
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 0px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            aspect-ratio: 1/1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .puzzle_block {
+            background-color: #f5f5f5;
+            border-radius: 2px;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            aspect-ratio: 1/1;
+        }
+
+        .puzzle_block.empty {
+            background-image: none;
+            border: 2px dashed #ccc;
+        }
+
+        .remove-btn {
+            opacity: 0;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: #ff3a30;
+        }
+        .puzzle_block:not(.empty):hover > .remove-btn {
+            opacity: 1;
+        }
+
+        /* Skjul elementer når sidebar er minimeret */
+        .sidebar.minimized .sidebar-title,
+        .sidebar.minimized .filter-section,
+        .sidebar.minimized #sidebar {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* Responsiv design for mindre skærme */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .puzzle_block {
+                min-height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar-container" aria-label="Produktfilter og liste">
+    <div class="sidebar-header">
+        <h2 class="sidebar-title">Produkter</h2>
+        <button class="toggle-btn" id="toggleBtn">≡</button>
+    </div>
+
+    <div class="filter-section" role="region" aria-label="Produktfiltrering">
+        <h3 class="filter-title">Filtrer produkter</h3>
+        <div class="filter-options">
+            <select id="stentype-filter" onchange="filtrerProdukter('stentyper', this.value)">
+                <option value="">Alle stentyper</option>
+            </select>
+
+            <select id="farve-filter" onchange="filtrerProdukter('farver', this.value)">
+                <option value="">Alle farver</option>
+            </select>
+
+            <select id="overflade-filter" onchange="filtrerProdukter('overflader', this.value)">
+                <option value="">Alle overflader</option>
+            </select>
+
+            <input type="search" id="produkt-search" placeholder="Søg produkter..." aria-label="Søg produkter" oninput="searchProdukter(this.value)">
+
+            <button onclick="sorterProdukter('pris', true)">Sorter efter pris (lav-høj)</button>
+            <button onclick="sorterProdukter('pris', false)">Sorter efter pris (høj-lav)</button>
+            <button onclick="nulstilFiltre()">Nulstil filtre</button>
+        </div>
+    </div>
+
+    <div id="sidebar" role="complementary" aria-label="Produktliste">
+        <!-- Produkter indsættes her dynamisk -->
+    </div>
+</div>
+
+<!-- Hovedindhold -->
+<div class="main-content" id="mainContent">
+    <div id="board-wrapper">
+        <div id="controls">
+            <label for="gridSize">Vælg grid-størrelse: </label>
+            <select onchange="generateGrid()" id="gridSize">
+                <option value="2">2x2</option>
+                <option value="3" selected>3x3</option>
+                <option value="4">4x4</option>
+            </select>
+            <button onclick="resetGrid()">Nulstil grid</button>
+            <button onclick="exportToPDF()">Eksportér som PDF</button>
+        </div>
+        <div id="puzzle_container"></div>
+    </div>
+</div>
+
+<script>
+    // Global variabel til at holde styr på produkter
+    let alleProdukter = [];
+    let uniqueStentyper = new Set();
+    let uniqueFarver = new Set();
+    let uniqueOverflader = new Set();
+
+    // Variabler til håndtering af udvalgte produkter
+    let selectedStoneSrc = null;
+    let selectedProduktInfo = null;
+
+    // Initialiser siden ved brug af 2 funktioner
+    window.onload = function() {
+        generateGrid(); // laver et board brugeren kan bruge
+        loadProdukter(); // henter alle produkter, tilføjer dem til sidebar
+    };
+
+    // JavaScript til at styre sidebar funktionalitet
+    const sidebarContainer = document.getElementById('sidebar-container');
+    const mainContent = document.getElementById('mainContent');
+    const toggleBtn = document.getElementById('toggleBtn');
+
+    toggleBtn.addEventListener('click', function() {
+        sidebarContainer.classList.toggle('minimized');
+        mainContent.classList.toggle('expanded');
+    });
+
+    // Funktion til at indlæse produkter
+    // Funktion til at indlæse produkter
+    function loadProdukter() {
+        fetch('liste_data.json')
+            .then(response => response.json())
+            .then(produkter => {
+                // Hvis du vil bruge produkterne globalt
+                alleProdukter = produkter;
+                const sidebar = document.getElementById("sidebar");
+                sidebar.innerHTML = ""; // Ryd sidebaren
+
+                // Opret sæt for unikke værdier
+                const uniqueStentyper = new Set();
+                const uniqueFarver = new Set();
+                const uniqueOverflader = new Set();
+
+                // Udfyld filtre med unikke værdier
+                produkter.forEach(produkt => {
+                    produkt.stentyper.forEach(type => uniqueStentyper.add(type));
+                    produkt.farver.forEach(farve => uniqueFarver.add(farve));
+                    produkt.overflader.forEach(overflade => uniqueOverflader.add(overflade));
+                });
+
+                // Udfyld dropdown-menuer
+                populateFilter('stentype-filter', uniqueStentyper);
+                populateFilter('farve-filter', uniqueFarver);
+                populateFilter('overflade-filter', uniqueOverflader);
+
+                // Opret og tilføj hvert produktelement
+                produkter.forEach(produkt => {
+                    const produktElement = document.createElement("div");
+                    produktElement.className = "produkt-item";
+                    produktElement.dataset.navn = produkt.produkt_navn;
+                    produktElement.dataset.pris = produkt.pris;
+                    produktElement.dataset.oprindelse = produkt.oprindelse;
+                    produktElement.dataset.stentyper = JSON.stringify(produkt.stentyper);
+                    produktElement.dataset.overflader = JSON.stringify(produkt.overflader);
+                    produktElement.dataset.farver = JSON.stringify(produkt.farver);
+                    produktElement.dataset.anvendelse = produkt.anvendelse;
+                    produktElement.setAttribute("role", "button");
+                    produktElement.setAttribute("tabindex", "0");
+
+                    // Opbyg HTML-indhold
+                    produktElement.innerHTML = `
+                    <img src="${produkt.billede_url}" alt="${produkt.produkt_navn}" draggable="true" data-produkt='${JSON.stringify(produkt)}'>
+                    <p>${produkt.produkt_navn}</p>
+                    <p>${produkt.pris}</p>
+                `;
+
+                    // Tilføj drag event listener
+                    const img = produktElement.querySelector('img');
+                    img.addEventListener('dragstart', function(event) {
+                        event.dataTransfer.setData("text/plain", event.target.src);
+                        event.dataTransfer.setData("text/product-info", event.target.dataset.produkt);
+                    });
+
+                    // Klik for at vælge produkt – marker med .selected
+                    produktElement.addEventListener('click', function() {
+                        document.querySelectorAll('.produkt-item').forEach(el => el.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedStoneSrc = this.querySelector('img').src;
+                        selectedProduktInfo = JSON.parse(this.querySelector('img').dataset.produkt);
+                    });
+
+                    sidebar.appendChild(produktElement);
+                });
+            })
+            .catch(error => {
+                console.error("Fejl ved indlæsning af produkter:", error);
+            });
+    }
+
+    // Udfyld dropdown-filter med unikke værdier
+    function populateFilter(filterId, uniqueValues) {
+        const filter = document.getElementById(filterId);
+        filter.innerHTML = `<option value="">Alle ${filterId.split('-')[0]}r</option>`;
+        uniqueValues.forEach(value => {
+            const option = document.createElement('option');
+            option.value = value;
+            option.textContent = value;
+            filter.appendChild(option);
+        });
+    }
+
+    // Nulstil alle filtre
+    function nulstilFiltre() {
+        document.getElementById('stentype-filter').value = '';
+        document.getElementById('farve-filter').value = '';
+        document.getElementById('overflade-filter').value = '';
+        document.getElementById('produkt-search').value = '';
+        document.querySelectorAll('.produkt-item').forEach(produkt => {
+            produkt.style.display = 'block';
+        });
+    }
+
+    // Søgefunktion for produkter i sidebaren
+    function searchProdukter(query) {
+        query = query.toLowerCase();
+        document.querySelectorAll('.produkt-item').forEach(produkt => {
+            const navn = produkt.dataset.navn.toLowerCase();
+            produkt.style.display = navn.includes(query) ? 'block' : 'none';
+        });
+    }
+
+    // Drag-and-drop funktioner
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        const imgSrc = event.dataTransfer.getData("text/plain");
+        const produktInfo = event.dataTransfer.getData("text/product-info");
+
+        let target = event.target;
+        if (!target.classList.contains('puzzle_block')) {
+            target = target.closest('.puzzle_block');
+            if (!target) return;
+        }
+        target.style.backgroundImage = `url(${imgSrc})`;
+        target.classList.remove('empty');
+
+        if (!target.querySelector('.remove-btn')) {
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'remove-btn';
+            removeBtn.innerHTML = 'X';
+            removeBtn.onclick = function(e) {
+                e.stopPropagation();
+                target.style.backgroundImage = '';
+                target.classList.add('empty');
+                target.removeAttribute('data-produkt-info');
+                this.remove();
+            };
+            target.appendChild(removeBtn);
+        }
+        if (produktInfo) {
+            target.setAttribute('data-produkt-info', produktInfo);
+        }
+    }
+
+    function handleBlockClick(event) {
+        if (selectedStoneSrc) {
+            if (event.target.classList.contains('remove-btn')) {
+                return;
+            }
+            const block = event.target.classList.contains('puzzle_block') ?
+                event.target :
+                event.target.closest('.puzzle_block');
+            if (!block) return;
+            block.style.backgroundImage = `url(${selectedStoneSrc})`;
+            block.classList.remove('empty');
+
+            if (!block.querySelector('.remove-btn')) {
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-btn';
+                removeBtn.innerHTML = 'X';
+                removeBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    block.style.backgroundImage = '';
+                    block.classList.add('empty');
+                    block.removeAttribute('data-produkt-info');
+                    this.remove();
+                };
+                block.appendChild(removeBtn);
+            }
+            if (selectedProduktInfo) {
+                block.setAttribute('data-produkt-info', JSON.stringify(selectedProduktInfo));
+            }
+        }
+    }
+
+    function generateGrid() {
+        const container = document.getElementById("puzzle_container");
+        const oldBlocks = Array.from(container.children);
+        const oldGridSize = Math.sqrt(oldBlocks.length) || 0;
+        const newGridSize = parseInt(document.getElementById("gridSize").value);
+
+        const existingData = [];
+        oldBlocks.forEach(block => {
+            existingData.push({
+                backgroundImage: block.style.backgroundImage,
+                isEmpty: block.classList.contains('empty'),
+                produktInfo: block.getAttribute('data-produkt-info')
+            });
+        });
+
+        container.style.gridTemplateColumns = `repeat(${newGridSize}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${newGridSize}, 1fr)`;
+        container.innerHTML = "";
+
+        const totalBlocks = newGridSize * newGridSize;
+        for (let i = 0; i < totalBlocks; i++) {
+            const block = document.createElement("div");
+            block.classList.add("puzzle_block", "empty");
+            block.addEventListener('click', handleBlockClick);
+            block.addEventListener('dragover', allowDrop);
+            block.addEventListener('drop', drop);
+
+            const row = Math.floor(i / newGridSize);
+            const col = i % newGridSize;
+
+            if (row < oldGridSize && col < oldGridSize && oldGridSize > 0) {
+                const oldIndex = row * oldGridSize + col;
+                if (oldIndex < existingData.length) {
+                    const oldData = existingData[oldIndex];
+                    if (oldData.backgroundImage) {
+                        block.style.backgroundImage = oldData.backgroundImage;
+                        if (!oldData.isEmpty) {
+                            block.classList.remove("empty");
+                            const removeBtn = document.createElement('button');
+                            removeBtn.className = 'remove-btn';
+                            removeBtn.innerHTML = 'X';
+                            removeBtn.onclick = function(e) {
+                                e.stopPropagation();
+                                block.style.backgroundImage = '';
+                                block.classList.add('empty');
+                                block.removeAttribute('data-produkt-info');
+                                this.remove();
+                            };
+                            block.appendChild(removeBtn);
+                        }
+                        if (oldData.produktInfo) {
+                            block.setAttribute('data-produkt-info', oldData.produktInfo);
+                        }
+                    }
+                }
+            }
+            container.appendChild(block);
+        }
+    }
+
+    function resetGrid() {
+        const container = document.getElementById("puzzle_container");
+        const blocks = container.querySelectorAll(".puzzle_block");
+        blocks.forEach(block => {
+            block.style.backgroundImage = "";
+            block.classList.add("empty");
+            block.removeAttribute('data-produkt-info');
+            const removeBtn = block.querySelector('.remove-btn');
+            if (removeBtn) {
+                removeBtn.remove();
+            }
+        });
+    }
+
+    function filtrerProdukter(filterKriterie, filterVærdi) {
+        if (!filterVærdi) {
+            document.querySelectorAll('.produkt-item').forEach(produkt => {
+                produkt.style.display = 'block';
+            });
+            return;
+        }
+        const alleProdukter = document.querySelectorAll('.produkt-item');
+        alleProdukter.forEach(produkt => {
+            let synlig = true;
+            if (filterKriterie === 'stentyper' || filterKriterie === 'overflader' || filterKriterie === 'farver') {
+                try {
+                    const værdier = JSON.parse(produkt.dataset[filterKriterie]);
+                    synlig = værdier.includes(filterVærdi);
+                } catch (e) {
+                    console.error(`Fejl ved parsing af ${filterKriterie}:`, e);
+                    synlig = false;
+                }
+            } else if (produkt.dataset[filterKriterie]) {
+                synlig = produkt.dataset[filterKriterie].toLowerCase().includes(filterVærdi.toLowerCase());
+            } else if (filterKriterie === 'pris' && produkt.dataset.pris) {
+                const pris = parseFloat(produkt.dataset.pris);
+                synlig = pris <= parseFloat(filterVærdi);
+            }
+            produkt.style.display = synlig ? 'block' : 'none';
+        });
+    }
+
+    function sorterProdukter(sorteringsKriterie, stigende = true) {
+        const sidebar = document.getElementById("sidebar");
+        const produkter = Array.from(document.querySelectorAll('.produkt-item'));
+        produkter.sort((a, b) => {
+            let værdA, værdB;
+            if (sorteringsKriterie === 'pris') {
+                værdA = parseFloat(a.dataset.pris) || 0;
+                værdB = parseFloat(b.dataset.pris) || 0;
+            } else {
+                værdA = a.dataset[sorteringsKriterie] || '';
+                værdB = b.dataset[sorteringsKriterie] || '';
+            }
+            if (stigende) {
+                return værdA > værdB ? 1 : -1;
+            } else {
+                return værdA < værdB ? 1 : -1;
+            }
+        });
+        produkter.forEach(produkt => sidebar.appendChild(produkt));
+    }
+
+    // Dummy-funktion til PDF-eksport (erstat med faktisk implementering)
+    function exportToPDF() {
+        alert("PDF eksport-funktionalitet vil blive implementeret her");
+    }
+</script>
+</body>
+</html>

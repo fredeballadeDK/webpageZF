@@ -353,6 +353,9 @@ h1, h2, h3, h4, h5, h6 {
     .puzzle_block {
         touch-action: manipulation; /* Forbedrer touch-responsivitet */
     }
+    .remove-btn {
+        display: none;
+    }
 
     .content-wrapper {
         display: flex;

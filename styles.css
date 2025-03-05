@@ -25,12 +25,14 @@ h1, h2, h3, h4, h5, h6 {
 #controls-icon {
     position: absolute;
     top: 12px; /* Juster efter behov */
-    left: 14px; /* Juster efter behov */
+    left: 5%; /* Juster efter behov */
 }
 
 #controls-content {
-    padding: 5px;
+    padding: 10px 10px;
     display: table-column;
+    background-color: #E2E9ED;
+    width: 80%;
 }
 
 #controls-content.hidden {
@@ -245,6 +247,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #export-pdf {
     background-color: #996F58 !important; /* Brown accent for export button */
+    height: 37px;
 }
 
 #export-pdf:hover {
@@ -345,6 +348,10 @@ h1, h2, h3, h4, h5, h6 {
     /* Switch to vertical layout */
     body {
         flex-direction: column;
+    }
+    
+    .puzzle_block {
+        touch-action: manipulation; /* Forbedrer touch-responsivitet */
     }
 
     #controls {

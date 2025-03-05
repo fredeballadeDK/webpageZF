@@ -31,8 +31,9 @@ h1, h2, h3, h4, h5, h6 {
 #controls-content {
     padding: 10px 10px;
     display: table-column;
-    background-color: #E2E9ED;
-    width: 80%;
+    justify-content: space-between;
+     /* background-color: #E2E9ED; */
+    width: 100%;
 }
 
 #controls-content.hidden {
@@ -108,7 +109,6 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 15px;
     color: #233c4d;
     font-family: 'Nunito Sans', Arial, sans-serif;
-
 }
 
 .filter-options.collapsed {
@@ -306,7 +306,7 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Nunito Sans', Arial, sans-serif;
 }
 
-.puzzle_block:hover .tooltip {
+.puzzle_block:hover .tooltip, .puzzle_block:active .tooltip {
     opacity: 1;
 }
 
@@ -349,13 +349,9 @@ h1, h2, h3, h4, h5, h6 {
     body {
         flex-direction: column;
     }
-    
+
     .puzzle_block {
         touch-action: manipulation; /* Forbedrer touch-responsivitet */
-    }
-
-    #controls {
-        display: none;
     }
 
     .content-wrapper {
@@ -398,13 +394,12 @@ h1, h2, h3, h4, h5, h6 {
         margin-bottom: 10px;
     }
 
+
     .filter-options {
-        display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         overflow-x: auto;
         padding-bottom: 10px; /* Add padding for scroll bar */
-        gap: 10px;
         width: 100%;
     }
 
@@ -464,9 +459,20 @@ h1, h2, h3, h4, h5, h6 {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center; /* Sørger for centreret indhold */
         width: 100%;
     }
+
+    #controls-content {
+        display: flex; /* Brug 'flex' i stedet for 'inherit' */
+        justify-content: center; /* Centrerer indhold horisontalt */
+        align-items: center; /* Centrerer indhold vertikalt */
+        width: 85%;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     #controls > label {
         display:none;
     }

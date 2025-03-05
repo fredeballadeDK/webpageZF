@@ -1,0 +1,482 @@
+
+    /* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #E2E9ED; /* Light background color */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+.icon {
+    aspect-ratio: 1/1;
+    height: 22px;
+}
+
+#controls-icon {
+    position: absolute;
+    top: 12px; /* Juster efter behov */
+    left: 14px; /* Juster efter behov */
+}
+
+#controls-content {
+    padding: 5px;
+    display: table-column;
+}
+
+#controls-content.hidden {
+    display: none;
+}
+
+#board-wrapper {
+    position: absolute;
+    left: 62%;
+    transform: translateX(-50%);
+    height: 70%;
+}
+
+/* Sidebar styles */
+.sidebar-container {
+    width: 24%;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    z-index: 100;
+}
+
+.sidebar-container.minimized {
+    width: 60px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #E2E9ED;
+    background-color: #233c4d; /* Dark blue header */
+    color: white;
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    transition: opacity 0.3s;
+    font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+/* Filter section styles */
+.filter-section {
+    padding: 15px;
+    border-bottom: 1px solid #E2E9ED;
+    transition: opacity 0.3s;
+    background-color: #9DBBB3; /* Medium teal background */
+}
+
+.filter-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #233c4d;
+    font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: ease-in;
+    transition-duration: 0.4ms;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #233c4d;
+    font-family: 'Nunito Sans', Arial, sans-serif;
+
+}
+
+.filter-options.collapsed {
+    display:none;
+}
+
+.filter-options select,
+.filter-options input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #E2E9ED;
+    font-size: 14px;
+    margin-bottom: 8px;
+    background-color: #fff;
+}
+
+.filter-options button {
+    padding: 8px 12px;
+    background-color: #233c4d;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 8px;
+    transition: background-color 0.2s;
+    color: white;
+    font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+.filter-options button:hover {
+    background-color: #1a2d3c;
+}
+
+/* Product list styles */
+#sidebar {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    transition: opacity 0.3s;
+    background-color: #E2E9ED; /* Light background */
+}
+
+.produkt-item {
+    cursor: pointer;
+    transition: transform 0.2s;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 10px;
+}
+
+.produkt-item:hover {
+    transform: scale(1.12);
+}
+
+.produkt-item.selected {
+    border: 2px solid #996F58; /* Brown accent */
+    box-shadow: 0 3px 10px rgba(153, 111, 88, 0.2);
+    transform: scale(1.12);
+    border-radius: 6px;
+}
+
+.produkt-item img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.produkt-item p {
+    font-size: 14px;
+    color: #233c4d;
+    text-align: center;
+    font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+
+
+
+
+
+/* Controls styles */
+#controls {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #9DBBB3; /* Medium teal */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    font-family: 'Nunito Sans', Arial, sans-serif;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-evenly;
+    position: relative;
+    min-height: 45px;
+
+}
+
+#reset-grid {
+    aspect-ratio: 1/1;
+}
+
+.button-icon {
+    font-size: 16px;
+}
+
+#controls label {
+    color: #233c4d;
+    font-weight: bold;
+}
+
+#controls select,
+#controls button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #E2E9ED;
+    font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+#controls select {
+    background-color: white;
+}
+
+#controls button {
+    background-color: #233c4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#controls button:hover {
+    background-color: #1a2d3c;
+}
+
+#export-pdf {
+    background-color: #996F58 !important; /* Brown accent for export button */
+}
+
+#export-pdf:hover {
+    background-color: #85604c !important;
+}
+
+
+
+/* Puzzle grid styles */
+#puzzle_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 20px;
+    background-color: #233c4d; /* Dark blue grid lines */
+    padding: 3px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: 100%;
+}
+
+.puzzle_block {
+    background-color: #E2E9ED;
+    border-radius: 2px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    aspect-ratio: 1/1;
+}
+
+.puzzle_block.empty {
+    background-image: none;
+    user-drag: none;
+}
+
+/* Tooltip styling */
+.puzzle_block .tooltip {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(35, 60, 77, 0.85); /* Dark blue with opacity */
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    pointer-events: none;
+    font-family: 'Nunito Sans', Arial, sans-serif;
+}
+
+.puzzle_block:hover .tooltip {
+    opacity: 1;
+}
+
+/* Remove button styling */
+.remove-btn {
+    opacity: 0;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #996F58; /* Brown accent */
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+}
+
+.puzzle_block:not(.empty):hover > .remove-btn {
+    opacity: 1;
+}
+
+/* Hide elements when sidebar is minimized */
+.sidebar-container.minimized .sidebar-title,
+.sidebar-container.minimized .filter-section,
+.sidebar-container.minimized #sidebar {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+
+
+@media (max-width: 1025px) {
+    /* Switch to vertical layout */
+    body {
+        flex-direction: column;
+    }
+
+    #controls {
+        display: none;
+    }
+
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Position the main content first */
+    .main-content {
+        order: 1;
+        margin-left: 0;
+        padding: 20px;
+        width: 100%;
+    }
+
+    .main-content.expanded {
+        margin-left: 0;
+    }
+
+    /* Position sidebar below the main content */
+    .sidebar-container {
+        order: 2;
+        width: 100%;
+        position: static;
+        height: auto;
+        min-height: 200px;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-container.minimized {
+        width: 100%;
+    }
+
+    /* Make filter section horizontal */
+    .filter-section {
+        padding: 15px;
+    }
+
+    .filter-title {
+        margin-bottom: 10px;
+    }
+
+    .filter-options {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px; /* Add padding for scroll bar */
+        gap: 10px;
+        width: 100%;
+    }
+
+    .filter-options select,
+    .filter-options input,
+    .filter-options button {
+        flex: 0 0 auto;
+        min-width: 150px;
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+
+    /* Make product list horizontally scrollable */
+    #sidebar {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        grid-template-columns: none;
+        padding: 15px;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+
+    .produkt-item {
+        flex: 0 0 auto;
+        width: 180px; /* Fixed width for items */
+        margin-right: 15px;
+    }
+
+    #board-wrapper {
+        position: relative;
+        left: auto;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto 20px auto;
+    }
+
+
+    /* Adjust puzzle container for the new layout */
+    #puzzle_container {
+        width: 100%;
+        max-width: 400px; /* Begræns maksimum bredde */
+        margin: 0 auto;
+        aspect-ratio: 1/1; /* Bevar kvadratisk form */
+    }
+    .puzzle_block {
+        min-height: 80px;
+    }
+
+    #controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+    #controls > label {
+        display:none;
+    }
+    .sidebar-header {
+        display:none;
+    }
+
+    #controls select,
+    #controls button {
+        margin: 5px;
+
+        padding: 12px;
+    }
+    .sidebar-header {
+        padding: 10px;
+    }
+
+    .sidebar-title {
+        font-size: 16px;
+    }
+
+
+}
+
